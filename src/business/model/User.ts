@@ -31,14 +31,4 @@ export class User {
     public getRole(){
         return this.role
     }
-
-    static toUserModel(data: any): User{
-        return new User(
-            data.id,
-            data.name,
-            data.email,
-            data.password,
-            data.role
-        )
-    }
 };
