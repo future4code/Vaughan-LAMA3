@@ -32,3 +32,14 @@ export class User {
         return this.role
     }
 };
+
+export const stringToUserRole = (input: string): USER_ROLES => {
+    switch (input) {
+       case "NORMAL":
+          return USER_ROLES.NORMAL;
+       case "ADMIN":
+          return USER_ROLES.ADMIN;
+       default:
+          throw new Error("Invalid user role");
+    }
+ };

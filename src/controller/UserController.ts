@@ -18,7 +18,7 @@ export class UserController {
                 role
             );
 
-            res.status(201).send(newUser);
+            res.status(201).send({message: "Usuário criado com sucesso!", token: newUser});
 
         } catch (error: any) {
             res.status(400).send({ message: error.message })

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 
-export class HashGenerator {
+export class HashManager {
     public createHash = async (text: string): Promise<any> => {
         const rounds: number = Number(process.env.BCRYPT_COST)
         const salt = await bcrypt.genSalt(rounds)
