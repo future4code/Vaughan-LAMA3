@@ -3,7 +3,7 @@ import { UserBusiness } from "../business/UserBusiness";
 
 export class UserController {
     constructor(
-        private userBusiness: UserBusiness
+        public userBusiness: UserBusiness
     ) { }
 
     public async signup(req: Request, res: Response) {
@@ -11,14 +11,14 @@ export class UserController {
 
             const { name, email, password, role } = req.body
 
-            const newUser = await this.userBusiness.signup(
+            const token = await this.userBusiness.signup(
                 name,
                 email,
                 password,
                 role
             );
 
-            res.status(201).send({message: "Usuário criado com sucesso!", token: newUser});
+            res.status(201).send({message: "Usuário cadastrado com sucesso!", token});
 
         } catch (error: any) {
             res.status(400).send({ message: error.message })

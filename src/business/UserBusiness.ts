@@ -12,7 +12,7 @@ export class UserBusiness {
         private HashManager: HashManager
     ) { }
 
-    public async signup(
+    async signup(
         name: string,
         email: string,
         password: string,
@@ -49,7 +49,7 @@ export class UserBusiness {
                 role
             });
 
-            return token
+            return { token }
 
         } catch (error: any) {
             throw new Error(error.message)
@@ -82,7 +82,7 @@ export class UserBusiness {
                 role: user.getRole()
             })
 
-            return accessToken
+            return { accessToken }
 
         } catch (error: any) {
             throw new Error(error.message)

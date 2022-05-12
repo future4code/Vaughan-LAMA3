@@ -2,7 +2,7 @@ import { AuthenticationData } from "../types/AuthenticationData";
 import * as jwt from "jsonwebtoken";
 
 export class Authenticator {
-    generateToken = (payload: AuthenticationData) => {
+    public generateToken = (payload: AuthenticationData) => {
         const token = jwt.sign(
             payload,
             process.env.JWT_KEY as string,
@@ -13,7 +13,7 @@ export class Authenticator {
         return token
     }
 
-    getTokenData = (token: string): AuthenticationData => {
+    public getTokenData = (token: string): AuthenticationData => {
         const data = jwt.verify(token, String(process.env.JWT_KEY))
         return data as AuthenticationData;
     };
