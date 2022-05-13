@@ -9,3 +9,25 @@ Content-Type: application/json
     "password": "123456", 
     "role": "ADMIN"
 }
+
+### 
+POST http://localhost:3003/user/login HTTP/1.1
+Content-Type: application/json
+
+{  
+    "email":"gabriel@gmail.com",
+    "password": "123456" 
+}
+
+### 
+### Getting bands by name 
+GET http://localhost:3003/band/?id=001 HTTP/1.1
+Content-Type: application/json
+
+### Getting bands by name
+
+GET http://localhost:3003/band/?name=oi HTTP/1.1
+Content-Type: application/json
+
+###
+
