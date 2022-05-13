@@ -1,12 +1,26 @@
 
 export enum DAY { 
-    "Friday" = "Friday",
-    "Saturday" = "Saturday",
-    "Sunday" = "Sunday"
+    "friday" = "friday",
+    "saturday" = "saturday",
+    "sunday" = "sunday"
 }
 
-
 export interface ShowInputDTO  { 
+    
+    bandId : string 
+    weekDay: DAY
+    startTime: number
+    endTime: number
+}
+export interface Show  { 
+    id:string
+    bandId : string 
+    weekDay: DAY
+    startTime: number
+    endTime: number
+}
+
+export interface ShowOutDTO  { 
     id: string
     week_day: DAY
     start_time: number
@@ -14,10 +28,18 @@ export interface ShowInputDTO  {
     band_id : string 
 }
 
-export interface ShowInputDTO  { 
-    id: string
-    week_day: DAY
+export interface ShowDateDTO { 
+
+    week_day: string
     start_time: number
-    end_time:  number
-    band_id : string 
+    end_time: number
+
+
+}
+export interface ShowDate { 
+
+    weekDay: string
+    startTime: number
+    endTime: number
+
 }

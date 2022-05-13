@@ -31,3 +31,21 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:3003/show/sign HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "bandId": "001", 
+    "weekDay":"friday", 
+    "startTime": 12, 
+    "endTime": 13
+}
+
+###
+
+GET http://localhost:3003/show/shows HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "weekDay":"friday"   
+}
