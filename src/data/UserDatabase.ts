@@ -19,7 +19,7 @@ export class UserDatabase extends BaseDatabase {
     public async createUser(user: User): Promise<void> {
         try {
             await BaseDatabase.connection(this.tableName)
-                .insert({user});
+                .insert(user);
 
         } catch (error: any) {
             throw new Error(error.sqlMessage || error.message)

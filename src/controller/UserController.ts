@@ -6,7 +6,7 @@ export class UserController {
         public userBusiness: UserBusiness
     ) { }
 
-    public async signup(req: Request, res: Response) {
+    public  signup = async (req: Request, res: Response) => {
         try {
 
             const { name, email, password, role } = req.body
