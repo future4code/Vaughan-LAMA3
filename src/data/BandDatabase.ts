@@ -2,45 +2,51 @@ import { Band, BandInputDBDTO } from "../business/model/Band";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class BandDatabase extends BaseDatabase {
+    protected tableName: string = "lama_bands"
 
-    public insertingBand = async(band: Band)=> { 
-        
-       const bandDB:BandInputDBDTO = {
-        id:band.id,
-        name:band.name,
-        music_genre: band.musicGenre,
-        responsible: band.responsible
-       }
+    private toBandModel(data: any): Band {
+        return (
+            data &&
+            new Band(
+                data.id,
+                data.name,
+                data.musicGenre,
+                data.responsible
+            )
+        )
+    }
 
-       await BaseDatabase.connection("lama_bands")
-       .insert(bandDB)
+    public insertingBand = async (band: Band) => {
+        try {
+            const bandDB: BandInputDBDTO = {
+                id: band.id,
+                name: band.name,
+                music_genre: band.musicGenre,
+                responsible: band.responsible
+            }
+
+            await BaseDatabase.connection(this.tableName)
+                .insert(bandDB)
+
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message)
+        }
 
     }
 
     public getBandById = async (id: string) => {
 
-        const [result]: BandInputDBDTO[] = await BaseDatabase.connection("lama_bands")
+        const band: BandInputDBDTO[] = await BaseDatabase.connection(this.tableName)
             .where({ id })
 
-        const Band: Band = {
-            id: result.id,
-            name: result.name,
-            musicGenre: result.music_genre,
-            responsible: result.responsible
-        }
-        return Band
+        return band[0] && this.toBandModel(band[0])
     }
+
     public getBandByName = async (name: string) => {
 
-        const [result]: BandInputDBDTO[] = await BaseDatabase.connection("lama_bands")
+        const band: BandInputDBDTO[] = await BaseDatabase.connection(this.tableName)
             .where({ name })
 
-        const Band: Band = {
-            id: result.id,
-            name: result.name,
-            musicGenre: result.music_genre,
-            responsible: result.responsible
-        }
-        return Band
+        return band[0] && this.toBandModel(band[0])
     }
 }

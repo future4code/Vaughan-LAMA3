@@ -24,16 +24,19 @@ const userController = new UserController(userBusiness)
 // Band 
 
 const bandBusiness = new BandBusiness(
-    new BandDatabase()
+    new BandDatabase(),
+    new IdGenerator()
 )
 
-const bandController =new BandController(
+const bandController = new BandController(
     bandBusiness
 )
 
 app.post("/user/signup", userController.signup)
 
 app.post("/user/login", userController.login)
+
+app.post("/band", bandController.signingBand)
 
 app.get("/band", bandController.getBandByIdName)
 
