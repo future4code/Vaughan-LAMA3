@@ -11,10 +11,9 @@ export class ShowController {
        
         const { bandId , weekDay , startTime , endTime  } = request.body;
 
-        const show : ShowInputDTO = { 
+        // const show : ShowInputDTO = { 
 
         }
 
     }
 
-}
