@@ -20,8 +20,14 @@ Content-Type: application/json
 }
 
 ### 
-
+### Getting bands by name 
 GET http://localhost:3003/band/?id=001 HTTP/1.1
 Content-Type: application/json
 
+### Getting bands by name
+
+GET http://localhost:3003/band/?name=oi HTTP/1.1
+Content-Type: application/json
+
+###
 

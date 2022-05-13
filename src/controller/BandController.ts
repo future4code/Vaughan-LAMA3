@@ -9,9 +9,9 @@ export class BandController {
         private bandBusiness : BandBusiness
     ){ }
 
-    public singBand = async (request: Request , Response :Response): Promise<void> => { 
+    public signingBand = async (request: Request , Response :Response): Promise<void> => { 
 
-       
+        const {name , musicGenre , responsible } = request.body;
 
     }
 
