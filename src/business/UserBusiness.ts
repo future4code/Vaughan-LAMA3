@@ -9,7 +9,7 @@ export class UserBusiness {
         private userDatabase: UserDatabase,
         private authenticator: Authenticator,
         private idGenerator: IdGenerator,
-        private HashManager: HashManager
+        private hashManager: HashManager
     ) { }
 
     async signup(
@@ -37,7 +37,7 @@ export class UserBusiness {
 
             const id = this.idGenerator.generateId();
 
-            const hashPassword = await this.HashManager.createHash(password);
+            const hashPassword = await this.hashManager.createHash(password);
 
             await this.userDatabase.createUser(
                 new User(
@@ -73,7 +73,7 @@ export class UserBusiness {
                 throw new Error("Invalid email.")
             };
 
-            const passwordVerifier = await this.HashManager.compareHash(
+            const passwordVerifier = await this.hashManager.compareHash(
                 password,
                 user.getPassword()
             );

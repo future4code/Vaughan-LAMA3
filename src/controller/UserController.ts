@@ -25,7 +25,7 @@ export class UserController {
         }
     }
 
-    public async login(req: Request, res: Response) {
+    public  login  = async (req: Request, res: Response) => {
         try {
             const { email, password } = req.body
             const userLogin = await this.userBusiness.login(email, password);

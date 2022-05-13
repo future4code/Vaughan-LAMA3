@@ -25,7 +25,6 @@ export class UserDatabase extends BaseDatabase {
             throw new Error(error.sqlMessage || error.message)
         }
     }
-
     public async findUserByEmail(email: string): Promise<User> {
         try {
             const user = await BaseDatabase.connection(this.tableName)
