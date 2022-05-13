@@ -1,18 +1,18 @@
 import { BandBusiness } from "../src/business/BandBussiness";
-import { BandDatabaseMock } from "./mocks/BandDatabaseMock";
-import { bandMock } from "./mocks/bandMock";
-import { IdGeneratorMock } from "./mocks/IdGeneratorMock";
-
-const bandBusinessMock = new BandBusiness(
-    new BandDatabaseMock() as any,
-    new IdGeneratorMock()
-)
+import { bandDatabase } from "./mock/BandDataBaseMock";
+import { bandMock } from "./mock/bandMock";
+import { idGenerator } from "./mock/IdGeneratorMock";
 
 const mockBandError = {
     name: null,
     musicGenre: "lala",
     responsible: "lalala"
 }
+
+const bandBusinessMock = new BandBusiness(
+    bandDatabase,
+    idGenerator
+)
 
 describe("Teste de Registro de banda", () => {
     test("Erro ao não passar o nome", async () => {
