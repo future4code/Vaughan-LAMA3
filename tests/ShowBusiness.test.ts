@@ -22,7 +22,7 @@ let showMockSuccess = {
     endTime: 10
 }
 
-describe("Testing Sign Show", () => {
+describe("Testing Signing Show", () => {
     test("Error for missing field", async() => {
         expect.assertions
         try{

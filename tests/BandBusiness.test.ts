@@ -14,8 +14,8 @@ const bandBusinessMock = new BandBusiness(
     idGenerator
 )
 
-describe("Teste de Registro de banda", () => {
-    test("Erro ao não passar o nome", async () => {
+describe("Testing signing band", () => {
+    test("Error not filling name", async () => {
         expect.assertions
         try {
             await bandBusinessMock.signingBand(
@@ -26,16 +26,14 @@ describe("Teste de Registro de banda", () => {
         }
     })
 
-    test("Sucesso ao registrar banda", async () => {
+    test("Success signing band", async () => {
         expect.assertions
         try {
             const signBand = await bandBusinessMock.signingBand(
                 bandMock
             )
 
-            expect(signBand).toEqual({
-                "message": "Band signed successfully!"
-            })
+            expect(signBand).toEqual("Band signed successfully!")
             
         } catch (error: any) {
             console.log(error)

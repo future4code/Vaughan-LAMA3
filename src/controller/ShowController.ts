@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { DAY, ShowInputDTO } from "../business/model/Show";
 import { ShowBusiness } from "../business/ShowBusiness";
 
-
 export class ShowController {
     constructor(
         private showBusiness: ShowBusiness
@@ -28,6 +27,7 @@ export class ShowController {
 
         }
     }
+
     public gettingShowByDate = async (request: Request, response: Response): Promise<void> => {
         try {
 

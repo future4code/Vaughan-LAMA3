@@ -3,7 +3,6 @@ import { ShowDatabase } from "../data/ShowDatabase";
 import { DAY, Show, ShowDate, ShowInputDTO } from "./model/Show";
 import { IdGenerator } from "./services/IdGenerator";
 
-
 export class ShowBusiness {
   constructor(
     private showDatabase: ShowDatabase,
@@ -11,8 +10,6 @@ export class ShowBusiness {
   ) { }
   public signShow = async (input: ShowInputDTO) => {
     try {
-
-      
 
       const { bandId, weekDay, startTime, endTime } = this.checks(input)
 
@@ -44,8 +41,8 @@ export class ShowBusiness {
 
   public gettingShowByDate = async (input: DAY) => {
 
-    if(input.toLowerCase().trim() !== "sunday" && input.toLowerCase().trim() !== "satuday" && input.toLowerCase().trim() !== "friday") {
-       throw new Error("That's not a valid day!")
+    if (input.toLowerCase().trim() !== "sunday" && input.toLowerCase().trim() !== "satuday" && input.toLowerCase().trim() !== "friday") {
+      throw new Error("That's not a valid day!")
     }
 
     const Date: ShowDate = {

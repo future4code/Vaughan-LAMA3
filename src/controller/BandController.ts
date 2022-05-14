@@ -3,8 +3,6 @@ import { BandBusiness } from "../business/BandBussiness";
 import { BandinputdDTO, getbandByInputDTO } from "../business/model/Band";
 import { Authenticator } from "../business/services/Authenticator";
 
-
-
 export class BandController {
     constructor(
         private bandBusiness: BandBusiness
@@ -35,10 +33,10 @@ export class BandController {
 
             await this.bandBusiness.signingBand(input)
 
-            response.status(201).send({ message: "Band signed successfully!"})
+            response.status(201).send({ message: "Band signed successfully!" })
 
         } catch (error: any) {
-            response.status(400).send({message: error.message})
+            response.status(400).send({ message: error.message })
         }
 
     }
