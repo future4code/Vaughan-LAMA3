@@ -1,3 +1,4 @@
+import { response } from "express";
 import { ShowDatabase } from "../data/ShowDatabase";
 import { DAY, Show, ShowDate, ShowInputDTO } from "./model/Show";
 import { IdGenerator } from "./services/IdGenerator";
@@ -11,31 +12,7 @@ export class ShowBusiness {
   public signShow = async (input: ShowInputDTO) => {
     try {
 
-      // const { bandId, weekDay, startTime, endTime } = input
-
-      // if (!bandId || !weekDay || !startTime || !endTime) {
-      //   throw new Error("Please fill all the fields!");
-      // }
-      // if (startTime < 8 || startTime > 22 || endTime < 9 || endTime > 23) {
-      //   throw new Error("That's out of our show hours!");
-      // }
-      // if (weekDay.toLowerCase().trim() !== "friday" &&weekDay.toLowerCase().trim() !== "saturday" && weekDay.toLowerCase().trim() !== "sunday") {
-      //   throw new Error("That's out of our show hours!");
-      // }
-
-
-
-      //  const showArray : Show[]=[]
-      //     let j = endTime - startTime
-      //   //  for( let i = startTime ; i <= endTime  ;  i++ ){
-      //    for( let i = startTime ; i <= endTime-1  ;  i++ ){
-      //       // const a = {id , bandId , weekDay , startTime : i, endTime , durantion : j-- }
-      //       const id = this.idGenerator.generateId()
-      //       const a = {id , bandId , weekDay , startTime : i, endTime  }
-      //       showArray.push(a)           
-      //    }
-      //    console.log(showArray)
-      //   await this.showDatabase.insertShow(showArray)
+      
 
       const { bandId, weekDay, startTime, endTime } = this.checks(input)
 
@@ -56,6 +33,7 @@ export class ShowBusiness {
       }
 
       await this.showDatabase.insertShow(show)
+      return "Show signed successfully!"
 
     } catch (error: any) {
       throw new Error(error.message)
@@ -66,14 +44,23 @@ export class ShowBusiness {
 
   public gettingShowByDate = async (input: DAY) => {
 
+    if(input.toLowerCase().trim() !== "sunday" && input.toLowerCase().trim() !== "satuday" && input.toLowerCase().trim() !== "friday") {
+       throw new Error("That's not a valid day!")
+    }
+
     const Date: ShowDate = {
       weekDay: input,
       startTime: 8,
       endTime: 23,
     }
 
-    const result = this.showDatabase.gettingShowByDate(Date)
+    const result = await this.showDatabase.gettingShowByDate(Date)
 
+    if (result.length === 0 || !result) {
+      throw new Error("There are no shows this day, yet!")
+    }
+
+    return result
   }
 
   public checks = (input: ShowInputDTO) => {

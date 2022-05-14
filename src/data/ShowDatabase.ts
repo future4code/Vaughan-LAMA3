@@ -60,6 +60,7 @@ export class ShowDatabase extends BaseDatabase {
                 .join("lama_bands", "lama_bands.id", "=", "lama_shows.band_id")
                 .where({ week_day: showByDate.week_day })
                 .havingBetween('start_time', [showByDate.start_time, showByDate.end_time])
+                .orderBy('start_time')
 
             return result.map(item => {
                 return {
