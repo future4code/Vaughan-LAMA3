@@ -19,11 +19,11 @@ export class UserBusiness {
         role: string
     ) {
         try {
-            console.log(   
+            console.log(
                 name,
                 email,
                 password,
-                role )
+                role)
 
             if (!name || !email || !password || !role) {
                 throw new Error("Please fill all the fields.")

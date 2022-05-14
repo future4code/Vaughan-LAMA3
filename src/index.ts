@@ -9,7 +9,6 @@ import { BandController } from "./controller/BandController";
 import { ShowController } from "./controller/ShowController";
 import { UserController } from "./controller/UserController";
 import { BandDatabase } from "./data/BandDatabase";
-import { Migrations } from "./data/Migrations";
 import { ShowDatabase } from "./data/ShowDatabase";
 import { UserDatabase } from "./data/UserDatabase";
 
@@ -46,8 +45,6 @@ const showController = new ShowController(
     showBusiness
 )
 
-
-
 app.post("/user/signup", userController.signup)
 
 app.post("/user/login", userController.login)
@@ -59,6 +56,3 @@ app.get("/band", bandController.getBandByIdName)
 app.post("/show/sign", showController.signShow)
 
 app.get("/show/shows", showController.gettingShowByDate)
-//Pra criar as tabelas é só descomentar as linhas abaixo e dar npm run start/dev!
-// Migrations.createTables()
-//     .finally(Migrations.closeConnection)

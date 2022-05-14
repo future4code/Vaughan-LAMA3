@@ -6,7 +6,7 @@ export class UserController {
         public userBusiness: UserBusiness
     ) { }
 
-    public  signup = async (req: Request, res: Response) => {
+    public signup = async (req: Request, res: Response) => {
         try {
 
             const { name, email, password, role } = req.body
@@ -18,14 +18,14 @@ export class UserController {
                 role
             );
 
-            res.status(201).send({message: "User created successfully!", token});
+            res.status(201).send({ message: "User created successfully!", token });
 
         } catch (error: any) {
             res.status(400).send({ message: error.message })
         }
     }
 
-    public  login  = async (req: Request, res: Response) => {
+    public login = async (req: Request, res: Response) => {
         try {
             const { email, password } = req.body
             const userLogin = await this.userBusiness.login(email, password);
