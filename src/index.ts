@@ -27,7 +27,8 @@ const userController = new UserController(userBusiness)
 
 const bandBusiness = new BandBusiness(
     new BandDatabase(),
-    new IdGenerator()
+    new IdGenerator(),
+    new Authenticator()
 )
 
 const bandController = new BandController(

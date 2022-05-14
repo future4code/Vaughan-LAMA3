@@ -12,18 +12,7 @@ export class BandController {
 
         try {
             const { name, musicGenre, responsible } = request.body;
-            const token = request.headers.authorization
-
-            if (!token) {
-                throw new Error("Authorization needed.")
-            }
-
-            const authenticator = new Authenticator();
-            const tokenData = authenticator.getTokenData(token);
-
-            if (tokenData.role !== "ADMIN") {
-                throw new Error("You don't have permission to sign a band.")
-            }
+            const token = request.headers.authorization as string
 
             const input: BandinputdDTO = {
                 name,
@@ -31,7 +20,7 @@ export class BandController {
                 responsible
             }
 
-            await this.bandBusiness.signingBand(input)
+            await this.bandBusiness.signingBand(input, token)
 
             response.status(201).send({ message: "Band signed successfully!" })
 

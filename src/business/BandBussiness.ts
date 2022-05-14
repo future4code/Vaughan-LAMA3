@@ -1,5 +1,6 @@
 import { BandDatabase } from "../data/BandDatabase"
 import { Band, BandinputdDTO, getbandByInputDTO } from "./model/Band"
+import { Authenticator } from "./services/Authenticator"
 import { IdGenerator } from "./services/IdGenerator"
 
 
@@ -7,12 +8,23 @@ export class BandBusiness {
 
     constructor(
         private bandDatabase: BandDatabase,
-        private idGenerator: IdGenerator
+        private idGenerator: IdGenerator,
+        private authenticator: Authenticator
     ) { }
 
-    public signingBand = async (input: BandinputdDTO): Promise<void> => {
+    public signingBand = async (input: BandinputdDTO, token: string): Promise<void> => {
         try {
             const { name, musicGenre, responsible } = input
+
+            if (!token) {
+                throw new Error("Authorization needed.")
+            }
+
+            const tokenData = this.authenticator.getTokenData(token);
+
+            if (tokenData.role !== "ADMIN") {
+                throw new Error("You don't have permission to sign a band.")
+            }
 
             if (!name || !musicGenre || !responsible) {
                 throw new Error("Please fill all the fields.")
@@ -25,7 +37,6 @@ export class BandBusiness {
             }
 
             const id = this.idGenerator.generateId()
-            console.log(id)
 
             await this.bandDatabase.insertingBand(
                 new Band(
@@ -39,8 +50,6 @@ export class BandBusiness {
         } catch (error: any) {
             throw new Error(error.message)
         }
-
-
     }
 
     public getBandByIdName = async (input: getbandByInputDTO): Promise<Band | undefined> => {
@@ -65,6 +74,5 @@ export class BandBusiness {
         }
 
     }
-
 
 }
