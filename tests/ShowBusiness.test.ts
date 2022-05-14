@@ -33,12 +33,12 @@ describe("Testing Sign Show", () => {
     })
 
     test("Success registering Show", async() => {
-        expect.assertions
+        expect.assertions(1)
         try {
             const signShow = await showBusinessMock.signShow(showMockSuccess as any)
-            expect(signShow).toEqual({
-                "message": "Show signed successfully!"
-            })
+            expect(signShow).toEqual(
+                 "Show signed successfully!"
+            )
         } catch (error: any) {
             console.log(error)
         }
