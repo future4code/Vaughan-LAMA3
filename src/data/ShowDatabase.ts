@@ -48,7 +48,7 @@ export class ShowDatabase extends BaseDatabase {
     public gettingShowByDate = async (data: ShowDate) => {
         try {
 
-            const showByDate : ShowDateDTO =
+            const showByDate: ShowDateDTO =
             {
                 week_day: data.weekDay,
                 start_time: data.startTime,
@@ -56,21 +56,17 @@ export class ShowDatabase extends BaseDatabase {
             }
 
 
-            const result = await  BaseDatabase.connection("lama_shows")
-            .join("lama_bands","lama_bands.id","=","lama_shows.band_id")
-            .where({ week_day: showByDate.week_day })
-            .havingBetween('start_time', [showByDate.start_time, showByDate.end_time])
+            const result = await BaseDatabase.connection("lama_shows")
+                .join("lama_bands", "lama_bands.id", "=", "lama_shows.band_id")
+                .where({ week_day: showByDate.week_day })
+                .havingBetween('start_time', [showByDate.start_time, showByDate.end_time])
 
-            return   result.map(item => {
-                 return { 
-                     name: item.name,
-                     musicGenre: item.music_genre
-                 }
-             })
-            
-            
-            
-       
+            return result.map(item => {
+                return {
+                    name: item.name,
+                    musicGenre: item.music_genre
+                }
+            })
 
         } catch (error: any) {
             throw new Error(error.sqlmessage || error.message);
